@@ -1,0 +1,47 @@
+<?php 
+
+return [
+	'0'	=> ['stateCode' => 0,'stateMsg' => '响应正常','stateData' =>[]],
+	'3'	=> ['stateCode' => 3,'stateMsg' => '传入参数错误,请检查.','stateData' =>[]],
+	'5'	=> ['stateCode' => 5,'stateMsg' => '不属于直属玩家代理!','stateData' =>[]],
+	'10'=> ['stateCode'	=> 10,'stateMsg' => '账号或者密码不正确','stateData'=>[]],
+	'11'=> ['stateCode'	=> 11,'stateMsg' => '验证码填写出错,请检查后在填入','stateData'	=>[]],
+	'12'=> ['stateCode'	=> 12,'stateMsg' => '登录过于频繁,请5分后在尝试登录.','stateData' => []],
+	'13'=> ['stateCode'	=> 13,'stateMsg' => '登录错误次数过多,需要填写验证码!','stateData' => []],
+	'100'	=> ['stateCode' => 100,'stateMsg' => '代理账号还未通过审核,请联系客服通过','stateData' => []],
+	'101'	=> ['stateCode'	=> 101,'stateMsg'=> '账号已被封停,请联系上级处理.','stateData' => []],
+	'102'	=> ['stateCode'	=> 102,'stateMsg'=> '提现失败,请稍后重试.','stateData' => []],
+	'200'	=>['stateCode'	=> 200,'stateMsg'=> '操作成功!','stateData' => []],
+	'300'	=>['stateCode'	=> 300,'stateMsg'=> '词汇存在敏感，请重新输入!','stateData' => []],
+	'301'	=>['stateCode'	=> 301,'stateMsg'=> '创建失败ID，重复.请重新创建!','stateData' => []],
+	'302'	=>['stateCode'	=> 302,'stateMsg'=> '俱乐部名称超过8个字符，或者简介超过25字符。','stateData' => []],
+
+	'404'	=>['stateCode'	=> 404,'stateMsg'=> '远程服务调用失败','stateData' => []],
+
+
+
+	'1001'	=>['stateCode'	=> 1001,'stateMsg'=> '当前玩家ID,为高级代理!只能充值给普通代理.','stateData' => []],
+	'1002'	=>['stateCode'	=> 1002,'stateMsg'=> '当前代理ID,尚未在后台购买房卡!购买成功后才能赠送','stateData' => []],
+	'1003'	=>['stateCode'	=> 1003,'stateMsg'=> '只能充值给普通代理.不能充值给高级代理与玩家.','stateData' => []],
+	'1004'	=>['stateCode'	=> 1004,'stateMsg'=> '当前代理已被标记,非法操作!','stateData' => []],
+	'1005'	=>['stateCode'	=> 1005,'stateMsg'=> '充值服务器异常,请稍后操作!','stateData' => []],
+	'1006'	=>['stateCode'	=> 1006,'stateMsg'=> '充值服务器异常,请稍后操作1006!','stateData' => []],
+	'1007'	=>['stateCode'	=> 1007,'stateMsg'=> '无法为该玩家充值!','stateData' => []],
+	'2001'	=>['stateCode'	=> 2001,'stateMsg'=> '俱乐部已超过限制,暂时不可以申请!','stateData' => []],
+	'2002'	=>['stateCode'	=> 2002,'stateMsg'=> '俱乐部创建成功,请等待审核！','stateData' => []],
+	'2003'	=>['stateCode'	=> 2003,'stateMsg'=> '审核异常，请重新重试','stateData' => []],
+	'3001'	=>['stateCode'	=> 3001,'stateMsg'=> '已领取过红包操作','stateData' => []],
+	'3002'	=>['stateCode'	=> 3002,'stateMsg'=> '领取失败，请重新访问','stateData' => []],
+	'3003'	=>['stateCode'	=> 3003,'stateMsg'=> '领取成功.','stateData' => []],
+	'3004'	=>['stateCode'	=> 3004,'stateMsg'=> '必须先关注微信公众号才能领取红包!','stateData' => []],
+	'4001'	=>['stateCode'	=> 4001,'stateMsg'=> '手机号未注册!','stateData' => []],
+	'4002'	=>['stateCode'	=> 4002,'stateMsg'=> '验证码发送太频繁，休息一下再试.','stateData' => []],
+	'4003'	=>['stateCode'	=> 4003,'stateMsg'=> '验证码错误,重试次数为3次，超过需要重新发送验证码','stateData' => []],
+	'4004'	=>['stateCode'	=> 4004,'stateMsg'=> '验证码不存在，请重新发送','stateData' => []],
+	'4005'	=>['stateCode'	=> 4005,'stateMsg'=> '验证码发送成功!','stateData' => []],
+	'5001'	=> ['stateCode'	=> 5001,'stateMsg'=> '短信发送次数已超过限制','stateData' => []],
+	'5002'	=> ['stateCode'	=> 5002,'stateMsg'=> '接口调用失败,请查看是否存在安全IP白名单','stateData' => []],
+	'5003'	=> ['stateCode'	=> 5003,'stateMsg'=> '手机号码填入不正确,请重新输入.','stateData' => []],
+	'6001' => ['stateCode'	=> 6001,'stateMsg'=> '提交成功','stateData' => []],
+	'6002' => ['stateCode'	=> 6002,'stateMsg'=> '已提交报名过,感谢您的支持!','stateData' => []],
+];

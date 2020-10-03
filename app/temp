@@ -1,0 +1,47 @@
+'phone' => [
+    'required',
+    'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\d{8}$/',
+    'unique:users'
+]
+
+
+用户注册
+
+        $verifyData = \Cache::get($request->verification_key);
+
+        if (!$verifyData) {
+            return $this->response->error('验证码已失效', 422);
+        }
+
+        if (!hash_equals($verifyData['code'], $request->verification_code)) {
+            // 返回401
+            return $this->response->errorUnauthorized('验证码错误');
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'phone' => $verifyData['phone'],
+            'password' => bcrypt($request->password),
+        ]);
+
+        // 清除验证码缓存
+        \Cache::forget($request->verification_key);
+
+        return $this->response->created();
+
+
+        hash_equals 是可防止时序攻击的字符串比较，那么什么是时序攻击呢？比如这段代码我们使用
+        $verifyData['code'] == $request->verification_code
+
+        进行比较，那么两个字符串是从第一位开始逐一进行比较的，发现不同就立即返回 false，那么通过计算返回的速度就知道了大概是哪一位开始不同的，
+        这样就实现了电影中经常出现的按位破解密码的场景。而使用 hash_equals 比较两个字符串，无论字符串是否相等，函数的时间消耗是恒定的，这样可以有效的防止时序攻击。
+
+
+
+
+看到结果返回 429 Too Many Requests，查看 Headers 其中有 X_RateLimit 相关的头信息。客户端判断状态码为 429 返回 操作频率过快，请稍后再试等提示即可。
+
+
+captcha
+
+'phone' => 'required|regex:/^1[34578]\d{9}$/|unique:users',

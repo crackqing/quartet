@@ -1,0 +1,16 @@
+{
+  "name": "通用项目API",
+  "version": "1.0.0",
+  "description": "格式{JSON} HTTP(POST),线上地址(game.dfylpro.com:8055) 返回不是200的状态码,请查找对应的errorCodeStats. 如未定请联系开发人员处理.",
+  "title": "API_接口说明 ",
+  "url": "BelongsProjectUrl.com",
+  "sampleUrl": false,
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2018-11-07T02:58:20.382Z",
+    "url": "http://apidocjs.com",
+    "version": "0.17.6"
+  }
+}

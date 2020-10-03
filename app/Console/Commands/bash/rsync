@@ -1,0 +1,78 @@
+# /etc/rsyncd: configuration file for rsync daemon mode
+# See rsyncd.conf man page for more options.
+# 传输文件使用的用户和用户组，如果是从服务器=>客户端，要保证www用户对文件有读取的权限；如果是从客户端=>服务端，要保证www对文件有写权限。
+uid = www
+gid = www
+# 允许chroot，提升安全性，客户端连接模块，首先chroot到模块path参数指定的目录下，chroot为yes时必须使用root权限，且不能备份path路径外的链接文件
+use chroot = yes
+# 只读
+read only = no
+# 只写
+write only = no
+# 设定白名单，可以指定IP段（172.18.50.1/255.255.255.0）,各个Ip段用空格分开
+hosts allow = *
+hosts deny = *
+# 允许的客户端最大连接数
+max connections = 10
+# 欢迎文件的路径，非必须
+motd file = /etc/rsync/rsyncd.motd
+# pid文件路径
+pid file = /var/run/rsyncd.pid
+# 记录传输文件日志
+transfer logging = yes
+# 日志文件格式
+log format = %t %a %m %f %b
+# 指定日志文件
+log file = /var/log/rsync.log
+# 剔除某些文件或目录，不同步
+exclude = lost+found/
+# 设置超时时间
+timeout = 900
+ignore nonreadable = yes
+# 设置不需要压缩的文件
+dont compress   = *.gz *.tgz *.zip *.z *.Z *.rpm *.deb *.bz2
+
+# 模块，可以配置多个，使用如: sate@172.18.50.125::125to110
+[redisrdb]
+# 模块的根目录，同步目录，要注意权限
+path = /home/backup/redis/
+# 是否允许列出模块内容
+list = no
+# 忽略错误
+ignore errors
+# 添加注释
+comment = redis rdb crontab 05:00
+# 模块验证的用户名称，可使用空格或者逗号隔开多个用户名
+auth users = sateredis
+# 模块验证密码文件 可放在全局配置里
+secrets file = /etc/rsync/rsyncd.secrets
+# 剔除某些文件或目录，不同步
+exclude = lost+found/ conf/ man/
+
+touch  rsyncd.secrets  chmod 600
+
+sateredis:oijahdaish3Ohge0quai
+
+
+touch rsyncd.motd
+
+++++++++++++++++++
+    game--server--redis|db backup rsync
+++++++++++++++++++
+
+
+
+ rsync --daemon --config=/etc/rsync/rsyncd.conf
+
+ # 会提示输入密码
+[root@50_110 ~]# rsync -avzP --delete /tmp/sync/ sate@172.18.50.125::125to110
+
+注: 如果是 /tmp/sync，则同步sync目录；如果 /tmp/sync/，则同步sync目录下的文件
+
+
+
+# 将密码写到文件，再通过 --password-file 指定该文件，注：该文件的权限必须是 600
+[root@50_110 ~]# echo "oijahdaish3Ohge0quai" > /etc/rsync.passwd
+[root@50_110 ~]# chmod 600 /etc/rsync.passwd
+[root@50_110 ~]# rsync -avzP --delete --password-file=/etc/rsync.passwd sate@172.18.50.125::125to110 /tmp/sync/
+

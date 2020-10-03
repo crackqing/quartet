@@ -1,0 +1,1333 @@
+{
+	"info": {
+		"_postman_id": "73ed0b28-1be4-e4e7-f35a-6b58a28ce04e",
+		"name": "quartet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "授权",
+			"item": [
+				{
+					"name": "oauth_授权_代理登录_测试",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"description": "授权模式",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "2",
+									"description": "默认为2",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "7pWbYdhhfJKLdREFIKFqCOohsDqxSBRURUyvsqc0",
+									"description": "默认的密钥",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test@test.com",
+									"description": "代理的帐号",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test",
+									"description": "代理的密码",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "",
+									"description": "授权作用域可以用使用*,默认为空.",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{HOST_IP}}/oauth/token"
+					},
+					"response": []
+				},
+				{
+					"name": "oauth_登录",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "必须"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"description": "代理的帐号",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test",
+									"description": "代理的密码",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{HOST}}/api/v1/authorizations",
+						"description": "令牌过期时间为15天,refresh_token为30天"
+					},
+					"response": []
+				},
+				{
+					"name": "oauth_更新令牌",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh_token",
+									"value": "def5020067e30ddb9aa55f398dc72620fc023d6cf1927405c64335de497d8c9983fa6c16c365079bc4ea7b92dad56e480eceea08b0b40710caa2a6f816c6a4c5ab3834526dffd012b3f20d8d2a348719dfcfa692be3341ab18dca38783da2c56bb0164b05a4c90cdfe6a093c75dd8afbad51903e83341893abd8520928ded96b5d6da93816375b6f234ea9a27a407228dac39cef86efeca0967d1cbe06dbb50b2fa992334dc1cc4eb3db26116ae4980b496737c97e77965614986d71817f17a8c7da45a54962f1f3b208b04c76fe19972cafae2a3bc5125cce7c339e4525de97a2b2d9029d334f62fc4d833dccfd4d2cedab1843f4ab413b315ec24f9ec18807262c434bd017451f5fe46dd9d3a9af1bf1cd70f343ebb4d7fc50ecb79d39fca04e64cad75f762ed665701c62be4265ad493eb6234ec76818efb5da237a29f20d04fb1065c028fb7a7be1d8964b239bd3a30b954c41c26e96c7aa897f1dc9043e92c1274c",
+									"description": "刷新用户令牌",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{HOST}}/api/v1/authorizations/current"
+					},
+					"response": []
+				},
+				{
+					"name": "oauth_清空登录(正常)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PASSPORT_1}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "{{HOST}}/api/v1/authorizations/current"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "运营后台(cors跨域支持)",
+			"item": [
+				{
+					"name": "游戏管理",
+					"item": [
+						{
+							"name": "游戏管理--游戏记录",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": "必须(字段)"
+									}
+								],
+								"body": {},
+								"url": "{{HOST}}/api/v1/gm/gameRecord"
+							},
+							"response": []
+						},
+						{
+							"name": "公告管理",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": "{{HOST}}/api/v1/gm/notice"
+							},
+							"response": []
+						},
+						{
+							"name": "公告管理--登录公告",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "content",
+											"value": "登录公告内容11111",
+											"sessionValue": "登录公告内容11111",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{HOST}}/api/v1/gm/notice/gameLoginNotice"
+							},
+							"response": []
+						},
+						{
+							"name": "公告管理--代理公告",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "content",
+											"value": "代理公告更换内容",
+											"sessionValue": "1111111111111111",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{HOST}}/api/v1/gm/notice/agentLoginNotice"
+							},
+							"response": []
+						},
+						{
+							"name": "公告管理--跑马灯",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "content",
+											"value": "跑马灯内容更换11111",
+											"sessionValue": "跑马灯内容更换11111",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{HOST}}/api/v1/gm/notice/marqueeLoginNotice"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "搜索条件列表",
+					"item": [
+						{
+							"name": "搜索条件说明--kindid",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": "{{HOST}}/api/v1/search/kindid"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "运营数据",
+					"item": [
+						{
+							"name": "运营数据--游戏分析",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": "必须(字段)"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{HOST}}/api/v1/operateGameAnalysis?time=2018-08-01 - 2018-08-30",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"operateGameAnalysis"
+									],
+									"query": [
+										{
+											"key": "time",
+											"value": "2018-08-01 - 2018-08-30"
+										}
+									]
+								},
+								"description": "运营后台 : 搜索字段   (paginate 分页条数  默认为12)  (kindid 游戏类型 默认为 default 10000)  (time 时间区间 2018-08-01 - 2018-08-30 开始与结束时间)\n\n\t#默认搜索为?paginate=12&=kindid=10000?time=''"
+							},
+							"response": []
+						},
+						{
+							"name": "运营数据--兑换记录",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": "{{HOST}}/api/v1/cashAnalysis"
+							},
+							"response": []
+						},
+						{
+							"name": "运营数据--充值记录",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": "{{HOST}}/api/v1/payAnalysis"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "48771499-12c2-4479-86a6-e734880feeb1",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7def88b6-a03d-4141-9fe7-48324e0334b1",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": " 核心-(权限,菜单,消息通知,操作)",
+			"item": [
+				{
+					"name": "角色",
+					"item": [
+						{
+							"name": "角色--添加角色 ",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "ower2",
+											"sessionValue": "名称",
+											"description": "角色(英文)",
+											"type": "text"
+										},
+										{
+											"key": "display_name",
+											"value": "2222",
+											"sessionValue": "显示名称",
+											"description": "角色名称",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "普通222",
+											"sessionValue": "角色详细",
+											"description": "角色详细",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{HOST}}/api/v1/role"
+							},
+							"response": []
+						},
+						{
+							"name": "角色--查询对应{role_id}权限",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{HOST}}/api/v1/role/:role",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"role",
+										":role"
+									],
+									"variable": [
+										{
+											"key": "role",
+											"value": "1",
+											"description": "对应的角色ID"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "角色--编辑角色",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "ower",
+											"sessionValue": "ower",
+											"type": "text"
+										},
+										{
+											"key": "display_name",
+											"value": "44444",
+											"sessionValue": "33333",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "普通3333",
+											"sessionValue": "普通3333",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{HOST}}/api/v1/role/:role",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"role",
+										":role"
+									],
+									"variable": [
+										{
+											"key": "role",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "角色--删除角色",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{HOST}}/api/v1/role/:role",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"role",
+										":role"
+									],
+									"variable": [
+										{
+											"key": "role",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "核心--角色列表（带分页）",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": "{{HOST}}/api/v1/role",
+								"description": "Role"
+							},
+							"response": []
+						},
+						{
+							"name": "角色--更新角色权限",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "role_id",
+											"value": "1",
+											"sessionValue": "1",
+											"type": "text"
+										},
+										{
+											"key": "permission",
+											"value": "1,2,3,4",
+											"sessionValue": "[1,2,3,4,5,6]",
+											"description": "权限数组",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{HOST}}/api/v1/role2Permission",
+								"description": "permission传入的参数为1,2,3,4,5权限的ID"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "权限",
+					"item": [
+						{
+							"name": "权限--添加权限",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "user.destroy222",
+											"sessionValue": "user.index",
+											"type": "text"
+										},
+										{
+											"key": "display_name",
+											"value": "管理员--删除",
+											"sessionValue": "管理员--列表",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "管理员--删除",
+											"sessionValue": "管理员--列表",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{HOST}}/api/v1/permission",
+								"description": "权限--添加权限"
+							},
+							"response": []
+						},
+						{
+							"name": "核心--权限列表(带分页)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": "{{HOST}}/api/v1/permission"
+							},
+							"response": []
+						},
+						{
+							"name": "权限列表--所有",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": "{{HOST}}/api/v1/permissions/all"
+							},
+							"response": []
+						},
+						{
+							"name": "权限--编辑权限",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "user.index",
+											"sessionValue": "user.index",
+											"type": "text"
+										},
+										{
+											"key": "display_name",
+											"value": "manager_user_list",
+											"sessionValue": "manager_permission_list",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "管理_用户_列表",
+											"sessionValue": "管理_权限_列表",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{HOST}}/api/v1/permission/:permission_id",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"permission",
+										":permission_id"
+									],
+									"variable": [
+										{
+											"key": "permission_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "权限--删除权限单个",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{HOST}}/api/v1/permission/:permission_id",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"permission",
+										":permission_id"
+									],
+									"variable": [
+										{
+											"key": "permission_id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "用户(RBAC)",
+					"item": [
+						{
+							"name": "用户--添加",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "邀请码1",
+											"sessionValue": "jackYang",
+											"description": "后台登录的标识名称",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "80001",
+											"sessionValue": "jackma@163.com",
+											"description": "登录后台的帐号可以是邮件也可以是手机号",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "jackma",
+											"sessionValue": "jackma",
+											"description": "后台登录的密码",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{HOST}}/api/v1/user"
+							},
+							"response": []
+						},
+						{
+							"name": "核心--管理员列表(带对应角色)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": "{{HOST}}/api/v1/user"
+							},
+							"response": []
+						},
+						{
+							"name": "用户--查询对应的user_id与角色",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{HOST}}/api/v1/user/:user_id",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "用户--删除对应的用户user_id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{HOST}}/api/v1/user/:user_id",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "用户--编辑用户信息(可单一修改)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "jackma222",
+											"sessionValue": "jackma222",
+											"description": "用户名称修改(可以单一修改)",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "17688786429",
+											"sessionValue": "17688786429",
+											"description": "后台登录的帐号登录 (可以单一修改)",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "jackam1",
+											"sessionValue": "jackam1",
+											"description": "后台登录的密码(可以单一修改)",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{HOST}}/api/v1/user/:user_id",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "用户--更新对应的角色处理",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{PASSPORT_1}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"sessionValue": "1",
+											"description": "用户ID",
+											"type": "text"
+										},
+										{
+											"key": "role_id",
+											"value": "1,3,4,5",
+											"sessionValue": "1,2,3,4,5,6",
+											"description": "角色ID（id带上,对应的多角色）",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{HOST}}/api/v1/user2Role"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "08170bcc-996a-4502-884c-4d58a466d680",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e061e97-d9f1-4667-b1c7-ab6db506bc47",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "用户--操作记录",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PASSPORT_1}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "{{HOST}}/api/v1/users/operation",
+						"description": "搜索条件:常规的搜索\n\t\n\tpaginate?=12&time=x&user_id="
+					},
+					"response": []
+				},
+				{
+					"name": "用户--登录记录",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{PASSPORT_1}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "{{HOST}}/api/v1/users/activeLogin"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "541143b8-e62c-418e-a065-a71e6ab55ca3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6865738e-b815-42a3-bbe8-cb447f52b678",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "游戏客户端",
+			"item": [
+				{
+					"name": "游戏--充值同步sync",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"price\": \"600\",\n\t\"order_id\": \"order---xxxxxxx1112\",\n\t\"agent_id\": \"111\",\n\t\"pay_type\": \"1\",\n\t\"coins\" : \"1000000\",\n\t\"bank\": \"200000\"\n}"
+						},
+						"url": "{{HOST}}/api/v1/orderSync"
+					},
+					"response": []
+				},
+				{
+					"name": "游戏--兑换同步sync",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cash_money\": \"600\",\n\t\"order_id\": \"order---xxxxxxx1112\",\n\t\"agent_id\": \"111\",\n\t\"agent_nickname\": \"1\",\n\t\"coins\" : \"1000000\",\n\t\"bank\": \"200000\"\n}"
+						},
+						"url": "{{HOST}}/api/v1/cashSync"
+					},
+					"response": []
+				},
+				{
+					"name": "代理--绑定邀请码",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"bind_id\": \"80001\",\n\t\"mobile\": \"17688786477\",\n\t\"agent_id\": \"300001\",\n\t\"agent_nickname\" :\"代理名称\"\n}"
+						},
+						"url": "{{HOST}}/api/v1/bindInviteCode"
+					},
+					"response": []
+				},
+				{
+					"name": "代理--检测绑定状态",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"bind_id\" : \"300001\"\n}"
+						},
+						"url": "{{HOST}}/api/v1/checkBindStatus"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
